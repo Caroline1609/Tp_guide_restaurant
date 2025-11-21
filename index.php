@@ -1,5 +1,5 @@
 <?php
-require "./dao/DbConnection.php";
+require "./src/dao/DbConnection.php";
 // 1. Connexion à la base
 $dbConnexion = DbConnection::getInstance();
 $pdo = $dbConnexion->getConnection();

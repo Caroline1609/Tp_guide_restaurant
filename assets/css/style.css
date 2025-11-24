@@ -23,18 +23,21 @@ table {
     margin: 0 auto;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    table-layout: auto;
+    margin-bottom: 40px;
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 16px 18px;
     border-bottom: 1px solid #ddd;
-    text-align: justify;
+    text-align: left;
 }
 
 th {
     background-color: #2980b9;
     color: #fff;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 tr:nth-child(even) {
@@ -45,12 +48,38 @@ tr:hover {
     background-color: #d6eaf8;
 }
 
-
-td:nth-child(6) {
-    font-weight: bold;
+table thead th:nth-child(1),
+table tbody td:nth-child(1) {
+    min-width: 120px;
 }
 
-td:nth-child(6)::after {
+table thead th:nth-child(2),
+table tbody td:nth-child(2) {
+    min-width: 180px;
+}
+
+table thead th:nth-child(3),
+table tbody td:nth-child(3) {
+    min-width: 80px;
+}
+
+table thead th:nth-child(4),
+table tbody td:nth-child(4) {
+    min-width: 200px;
+}
+
+table thead th:nth-child(5),
+table tbody td:nth-child(5) {
+    min-width: 100px;
+}
+
+table thead th:nth-child(6),
+table tbody td:nth-child(6) {
+    min-width: 150px;
+}
+
+table thead th:nth-child(5)::after,
+table tbody td:nth-child(5)::after {
     content: " ★";
     color: gold;
 }
@@ -60,3 +89,77 @@ main {
     margin: 0 auto;
     overflow-x: auto;
 }
+
+#form-ajout {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    background: #ffffff;
+    padding: 18px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(44,62,80,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+#form-ajout h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#form-ajout label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+#form-ajout input[type="text"],
+#form-ajout input[type="number"],
+#form-ajout input[type="date"],
+#form-ajout textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d8de;
+    border-radius: 6px;
+    font-size: 0.98rem;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    background: #fbfbfc;
+}
+
+#form-ajout textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button[type="submit"],
+button[type="button"] {
+    background: #2980b9;
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button[type="button"] {
+    background: #7f8c8d;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    opacity: 0.95;
+}
+
+.success {
+    color: #1e8449;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.error {
+    color: #c0392b;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Restaurant</title>
-    <link rel="stylesheet" href="assets\css\style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 <header>
@@ -11,6 +11,6 @@
     <nav>
         <a href="../index.php">Accueil</a>
         <a href="contact.php">Tout les avis</a>
-        <a href="vue\formualaire_Ajout.php">Ajouter une critique</a>
+        <a href="vue/formualaire_Ajout.php">Ajouter une critique</a>
     </nav>
 </header>

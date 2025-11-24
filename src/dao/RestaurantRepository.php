@@ -19,13 +19,13 @@ class RestoRepository
         return $stmt->fetchAll();
     }
 
-    public function searchByName(string $_nom): array
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE soundex(nom) = soundex(:nom)");
-        $stmt->bindValue(':id', $_nom, PDO::PARAM_STR); // Liaison du paramètre
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
+    // public function searchByName(string $_nom): array
+    // {
+    //     $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE soundex(nom) = soundex(:nom)");
+    //     $stmt->bindValue(':id', $_nom, PDO::PARAM_STR); // Liaison du paramètre
+    //     $stmt->execute();
+    //     return $stmt->fetchAll();
+    // }
 
 
     public function searchById(int $id): array

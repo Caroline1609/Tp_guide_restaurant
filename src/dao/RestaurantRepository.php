@@ -19,11 +19,12 @@ class RestoRepository
         return $stmt->fetchAll();
     }
 
-    public function searchByName(string $_name): array
+    public function searchByName(string $_nom): array
     {
-         $sql = "SELECT * FROM {$this->table} WHERE SOUNDEX(nom) = SOUNDEX(:nom)";
-        $stmt = $this->pdo->query($sql);
-         
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE soundex(nom) = soundex(:nom)");
+        $stmt->bindValue(':id', $_nom, PDO::PARAM_STR); // Liaison du paramètre
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
 

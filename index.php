@@ -69,7 +69,9 @@ $tableHtml = $repo->renderHtml(); // Générer le tableau HTML
     </section>
     <?php
             echo $tableHtml;
-        ?>
+            var_export($repo->searchByName('L’ADRIATIC'));
+    ?>
+
 </main>
 
 </body>

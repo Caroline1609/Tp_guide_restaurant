@@ -1,5 +1,5 @@
 <?php $title = "Ajouter un restaurant"; ?>
-<?php require __DIR__ . '/header.php'; ?>
+<?php require __DIR__ . '/../header.php';?>
 
 <body>
 
@@ -36,6 +36,21 @@
 
         <button type="submit">Ajouter</button>
     </form>
+
+    <?php 
+        // Messages et valeurs pré-remplies pour le formulaire
+        $successMsg = (!empty($_GET['success']) && $_GET['success'] == 1) ? 'Restaurant ajouté avec succès.' : ''; // Messages de succès
+        $errorMsg = !empty($_GET['error']) ? htmlspecialchars(urldecode($_GET['error'])) : ''; // Messages d'erreur
+        
+        $old = [ 
+            'nom' => isset($_GET['nom']) ? htmlspecialchars(urldecode($_GET['nom'])) : '',
+            'adresse' => isset($_GET['adresse']) ? htmlspecialchars(urldecode($_GET['adresse'])) : '',
+            'prix' => isset($_GET['prix']) ? htmlspecialchars(urldecode($_GET['prix'])) : '',
+            'commentaire' => isset($_GET['commentaire']) ? htmlspecialchars(urldecode($_GET['commentaire'])) : '',
+            'note' => isset($_GET['note']) ? htmlspecialchars(urldecode($_GET['note'])) : '',
+            'visite' => isset($_GET['visite']) ? htmlspecialchars(urldecode($_GET['visite'])) : '',
+        ];
+    ?>       
 </section>
 
 </body>

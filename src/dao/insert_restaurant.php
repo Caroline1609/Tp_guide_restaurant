@@ -50,10 +50,9 @@ $data = [
 $ok = $repo->insertRow($data);
 
 if ($ok) {
-    header('Location: ../../index.php?success=1');
-    exit;
+    // Redirection vers page_avis.php qui est dans /vue/
+    header('Location: ../../vue/page_avis.php?success=' . urlencode('Restaurant ajouté avec succès'));
 } else {
-    $params = ['error' => urlencode("Impossible d'insérer en base.")];
-    header('Location: ../../index.php?' . http_build_query($params)); 
-    exit;
+    // En cas d'échec, retour vers index.php (à la racine)
+    header('Location: ../../index.php?error=' . urlencode('Erreur lors de l\'ajout du restaurant'));
 }

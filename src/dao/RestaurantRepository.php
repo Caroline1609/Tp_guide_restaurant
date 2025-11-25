@@ -14,7 +14,7 @@ class RestoRepository
 
     public function searchAll(): array
     {
-        $sql = "SELECT nom, adresse, prix, commentaire, note, visite FROM {$this->table}"; // Requête SQL pour récupérer toutes les lignes
+        $sql = "SELECT id, nom, adresse, prix, commentaire, note, visite FROM {$this->table}"; // Requête SQL pour récupérer toutes les lignes
         $stmt = $this->pdo->query($sql); //
         return $stmt->fetchAll();
     }
@@ -60,43 +60,48 @@ class RestoRepository
 
 
     public function renderHtml(): string
-    {
-        $data = $this->searchAll();
-
-        if (empty($data)) {
-            return '<p>Aucune donnée à afficher.</p>';
-        }
-
-        // Récupérer les colonnes depuis les clés du premier enregistrement
-        $columns = array_keys($data[0]);
-
-        $html = '<table>';
-
-        // Ligne des colonnes
-        $html .= '<thead><tr>';
-        foreach ($columns as $col) {
-            $html .= '<th>' . htmlspecialchars($col) . '</th>';
-        }
-        $html .= '</tr></thead>';
-
-        // Corps du tableau
-        $html .= '<tbody>';
-        foreach ($data as $row) {
-            $html .= '<tr>';
-            foreach ($columns as $col) {
-                $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>';
-            }
-            $html .= '</tr>';
-        }
-        $html .= '</tbody>';
-        $html .= '</table>';
-
-        return $html;
+{
+    $data = $this->searchAll(); // inclut l'id dans les données, mais pas affiché
+    if (empty($data)) {
+        return '<p>Aucune donnée à afficher.</p>';
     }
+
+    // On prend toutes les colonnes sauf 'id' pour l'affichage
+    $columns = array_keys($data[0]);
+    $displayColumns = array_filter($columns, fn($col) => $col !== 'id');
+
+    $html = '<table>';
+    
+    // Entête
+    $html .= '<thead><tr>';
+    foreach ($displayColumns as $col) {
+        $html .= '<th>' . htmlspecialchars($col) . '</th>';
+    }
+    $html .= '<th>Modifier</th>'; // Colonne pour les boutons
+    $html .= '<th>Supression</th>';
+    $html .= '</tr></thead>';
+
+    // Corps du tableau
+    $html .= '<tbody>';
+    foreach ($data as $row) {
+        $html .= '<tr>';
+        foreach ($displayColumns as $col) {
+            $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>';
+        }
+        // Ajouter boutons modifier / supprimer
+        $html .= '<td><a href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
+        // Colonne Supprimer
+        $html .= '<td><a href="supprimer.php?id=' . $row['id'] . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a></td>';
+        $html .= '</tr>';
+    }
+    $html .= '</tbody>';
+    $html .= '</table>';
+
+    return $html;
+}
 
 
    public function insertRow($data)
-
     {
         // On écrit la requête SQL avec des "placeholders" pour sécuriser les données
         $sql = "INSERT INTO {$this->table} (nom, adresse, prix, commentaire, note, visite) 

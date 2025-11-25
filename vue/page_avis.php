@@ -10,13 +10,13 @@
 <main>
     <h1>Liste des avis</h1>
 
-    <?php if (isset($_GET['success'])): ?> // Affichage du message de succès ?>
+    <?php if (isset($_GET['success'])): ?>
         <div class="success"> 
             ✅ <?= htmlspecialchars($_GET['success']) ?>
         </div>
     <?php endif; ?>
     
-    <?php if (isset($_GET['error'])): ?> // Affichage du message d'erreur ?>
+    <?php if (isset($_GET['error'])): ?>
         <div class="error">
             ❌ <?= htmlspecialchars($_GET['error']) ?> 
         </div>

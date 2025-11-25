@@ -5,7 +5,7 @@ $tableHtml = $repo->renderHtml(); // Générer le tableau HTML
 require 'header.php';
 
 
-var_export($repo->infoTable());
+/*var_export($repo->infoTable());*/
 
 ?>
 

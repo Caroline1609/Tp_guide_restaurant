@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/Dbconnexion.php';
 
+
 class RestoRepository
 {
     private PDO $pdo;
@@ -39,14 +40,14 @@ class RestoRepository
 
 
 
-    private function infoTable(): array
+    public function infoTable(): array
     {
         $stmt = $this->pdo->query("DESCRIBE {$this->table}");
         $columns = [];
         $primaryKey = '';
 
         foreach ($stmt->fetchAll() as $col) {
-            $columns[] = $col['Field'];
+          array_push($columns, $col['Field']);
             if ($col['Key'] === 'PRI') {
                 $primaryKey = $col['Field'];
             }
@@ -88,10 +89,10 @@ class RestoRepository
         foreach ($displayColumns as $col) {
             $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>';
         }
-        // Ajouter boutons modifier / supprimer
-        $html .= '<td><a href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
-        // Colonne Supprimer
-        $html .= '<td><a href="supprimer.php?id=' . $row['id'] . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a></td>';
+         $html .= '<td><a class="btn-edit" href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
+
+            // Supprimer
+        $html .= '<td><a class="btn-delete" href="delete.php?id=' . $row['id'] . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a></td>';
         $html .= '</tr>';
     }
     $html .= '</tbody>';
@@ -119,4 +120,13 @@ class RestoRepository
             ':visite' => $data['visite']
         ]);
     }
+
+    public function deleteById(int $id): bool
+    {
+    $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
+    return $stmt->execute([':id' => $id]);
+    }
+
+
+    
 }

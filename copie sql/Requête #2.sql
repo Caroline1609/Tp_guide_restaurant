@@ -30,3 +30,4 @@ VALUES
     ('La Ferme Aubergine', '3 Chemin des Vergers, Turckheim', 25.00, 'Cuisine bio et végétarienne, cadre champêtre.', 4.4, '2025-10-05'),
     ('Le Comptoir des Saveurs', '18 Rue des Marchands, Thann', 29.90, 'Spécialités alsaciennes et desserts maison.', 4.3, '2025-11-20');
 
+

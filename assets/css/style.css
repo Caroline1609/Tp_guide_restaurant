@@ -181,3 +181,31 @@ button[type="button"]:hover {
     margin-bottom: 12px;
 }
 
+/* Bouton modifier (bleu) */
+.btn-edit {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-edit:hover {
+    background-color: #2980b9;
+}
+
+/* Bouton supprimer (rouge) */
+.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}

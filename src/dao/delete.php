@@ -1,16 +1,29 @@
 <?php
+// On charge le fichier qui contient la classe RestoRepository
 require_once __DIR__ . '/RestaurantRepository.php';
 
-if (!isset($_GET['id'])) {
-    die("ID manquant.");
-}
-
-$repo = new RestoRepository();
-$id = (int)$_GET['id'];
-
-if ($repo->deleteById((int)$_GET['id'])) {
-    header("Location: ../../vue/page_avis.php?delete=success"); // Redirection après suppression
+// Est-ce que l'ID existe dans le formulaire ?
+if (!isset($_POST['id'])) {
+    // Si non, on redirige avec un message d'erreur
+    header("Location: ../../vue/page_avis.php?error=ID manquant");
     exit;
-} else {
-    echo "Erreur lors de la suppression.";
 }
+
+// On transforme l'ID en nombre entier pour la sécurité
+$id = (int)$_POST['id'];
+
+// On crée une instance du repository (la classe qui parle à la base de données)
+$repo = new RestoRepository();
+
+// On essaie de supprimer le restaurant
+$resultat = $repo->deleteById($id);
+
+// Est-ce que la suppression a réussi ?
+if ($resultat) {
+    // OUI : on redirige avec un message de succès
+    header("Location: ../../vue/page_avis.php?success=Restaurant supprimé");
+} else {
+    // NON : on redirige avec un message d'erreur
+    header("Location: ../../vue/page_avis.php?error=Erreur de suppression");
+}
+exit;

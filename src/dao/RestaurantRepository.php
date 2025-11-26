@@ -32,7 +32,7 @@ class RestoRepository
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id"); // Requête SQL pour récupérer une ligne par ID
         $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Liaison du paramètre
         $stmt->execute(); // Exécution de la requête
-        return $stmt->fetchAll(); // Récupération des résultats
+        return $stmt->fetch(); // Récupération des résultats
     }
 
 
@@ -87,7 +87,7 @@ class RestoRepository
         foreach ($displayColumns as $col) { // Parcourt chaque colonne à afficher
             $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>'; // Affiche chaque cellule
         }
-         $html .= '<td><a class="btn-edit" href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
+         $html .= '<td><a class="btn-edit" href="../vue/modifCritique.php?id=' . $row['id'] . '">Modifier</a></td>';
         $html .= '<td>';
         $html .= '<form method="post" action="../src/dao/delete.php" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
         $html .= '<input type="hidden" name="id" value="' . $row['id'] . '">';
@@ -128,6 +128,13 @@ class RestoRepository
     return $stmt->execute([':id' => $id]);
     }
 
+ 
+public function modifyRow(int $id, array $data): bool
+{
+    $sql = "UPDATE restaurant SET nom = :nom, adresse = :adresse, prix = :prix, commentaire = :commentaire, note = :note, visite = :visite WHERE id = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $data['id'] = $id; // Ajoute l'ID aux données pour la requête
+    return $stmt->execute($data);
+}
 
-    
 }

@@ -1,5 +1,5 @@
 <?php
-// On charge le fichier qui contient la classe RestoRepository
+
 require_once __DIR__ . '/RestaurantRepository.php';
 
 if (!isset($_POST['id'])) {
@@ -11,7 +11,6 @@ $id = (int)$_POST['id'];
 
 $repo = new RestoRepository();
 
-// On essaie de supprimer le restaurant
 $delete = $repo->deleteById($id);
 
 if ($delete) {

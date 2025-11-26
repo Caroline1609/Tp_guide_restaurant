@@ -37,6 +37,7 @@ main h1 {
 
 table {
     width: 100%;
+    border-radius: 20px;
     border-collapse: collapse;
     margin: 0 auto;
     background-color: #fff;
@@ -181,3 +182,10 @@ button[type="button"]:hover {
     margin-bottom: 12px;
 }
 
+footer {
+    display : flex;
+    flex-direction: row;
+    justify-content: center
+
+    
+}

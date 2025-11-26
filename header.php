@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title ?? "Restaurant"; ?></title>
-    <link rel="stylesheet" href="/tp_guide_restaurant/assets/css/style.css">
+    <link rel="stylesheet" href="/Tp_guide_restaurant/assets/css/style.css">
 </head>
 <body>
 <header>

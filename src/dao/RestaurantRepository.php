@@ -1,19 +1,18 @@
 <?php
 require_once __DIR__ . '/Dbconnexion.php';
 
-
 class RestoRepository
 {
-    private PDO $pdo;
+    private PDO $pdo; // Instance de PDO pour la connexion à la base de données
     private string $table = "restaurant"; // Nom de la table
 
-    public function __construct()
+    public function __construct() // Constructeur
     {
-        $this->pdo = Dbconnexion::getInstance();
+        $this->pdo = Dbconnexion::getInstance(); // Récupère l'instance de PDO
     }
 
 
-    public function searchAll(): array
+    public function searchAll(): array // Récupère toutes les lignes de la table
     {
         $sql = "SELECT id, nom, adresse, prix, commentaire, note, visite FROM {$this->table}"; // Requête SQL pour récupérer toutes les lignes
         $stmt = $this->pdo->query($sql); //
@@ -28,50 +27,49 @@ class RestoRepository
     //     return $stmt->fetchAll();
     // }
 
-
-    public function searchById(int $id): array
+    public function searchById(int $id): array // Récupère une ligne par son ID
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id"); // Requête SQL pour récupérer une ligne par ID
         $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Liaison du paramètre
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $stmt->execute(); // Exécution de la requête
+        return $stmt->fetchAll(); // Récupération des résultats
     }
 
 
 
 
-    public function infoTable(): array
+    public function infoTable(): array // Récupère les informations sur la table
     {
-        $stmt = $this->pdo->query("DESCRIBE {$this->table}");
-        $columns = [];
-        $primaryKey = '';
+        $stmt = $this->pdo->query("DESCRIBE {$this->table}"); // Requête SQL pour décrire la table
+        $columns = []; // Tableau pour stocker les noms des colonnes
+        $primaryKey = ''; // Variable pour stocker la clé primaire
 
-        foreach ($stmt->fetchAll() as $col) {
-          array_push($columns, $col['Field']);
-            if ($col['Key'] === 'PRI') {
-                $primaryKey = $col['Field'];
+        foreach ($stmt->fetchAll() as $col) { // Parcourt chaque colonne
+          array_push($columns, $col['Field']); // Ajoute le nom de la colonne au tableau
+            if ($col['Key'] === 'PRI') { // Si la colonne est une clé primaire
+                $primaryKey = $col['Field']; // Stocke le nom de la clé primaire
             }
         }
 
-        return [
-            'columns' => $columns,
-            'primaryKey' => $primaryKey
+        return [ // Retourne un tableau avec les colonnes et la clé primaire
+            'columns' => $columns, // Noms des colonnes
+            'primaryKey' => $primaryKey // Nom de la clé primaire
         ];
     }
 
 
-    public function renderHtml(): string
+    public function renderHtml(): string // Génère le code HTML pour afficher les données dans un tableau
 {
     $data = $this->searchAll(); // inclut l'id dans les données, mais pas affiché
-    if (empty($data)) {
-        return '<p>Aucune donnée à afficher.</p>';
+    if (empty($data)) { // Si aucune donnée
+        return '<p>Aucune donnée à afficher.</p>'; // Message d'absence de données
     }
 
     // On prend toutes les colonnes sauf 'id' pour l'affichage
-    $columns = array_keys($data[0]);
-    $displayColumns = array_filter($columns, fn($col) => $col !== 'id');
+    $columns = array_keys($data[0]); // Récupère les noms des colonnes
+    $displayColumns = array_filter($columns, fn($col) => $col !== 'id'); // Filtre pour exclure 'id'
 
-    $html = '<table>';
+    $html = '<table>'; // Début du tableau HTML
     
     // Entête
     $html .= '<thead><tr>';
@@ -90,10 +88,8 @@ class RestoRepository
             $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>'; // Affiche chaque cellule
         }
          $html .= '<td><a class="btn-edit" href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
-
-            // Supprimer
         $html .= '<td>';
-        $html .= '<form method="post" action="../src/dao/delete.php" style="display:inline;" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
+        $html .= '<form method="post" action="../src/dao/delete.php" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
         $html .= '<input type="hidden" name="id" value="' . $row['id'] . '">';
         $html .= '<button type="submit" class="btn-delete">Supprimer</button>';
         $html .= '</form>';

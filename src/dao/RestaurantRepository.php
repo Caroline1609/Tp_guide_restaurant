@@ -92,7 +92,12 @@ class RestoRepository
          $html .= '<td><a class="btn-edit" href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
 
             // Supprimer
-        $html .= '<td><a class="btn-delete" href="delete.php?id=' . $row['id'] . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a></td>';
+        $html .= '<td>';
+        $html .= '<form method="post" action="delete.php" style="display:inline;" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
+        $html .= '<input type="hidden" name="id" value="' . $row['id'] . '">';
+        $html .= '<button type="submit" class="btn-delete">Supprimer</button>';
+        $html .= '</form>';
+        $html .= '</td>';
         $html .= '</tr>';
     }
     $html .= '</tbody>';

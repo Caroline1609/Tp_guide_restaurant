@@ -75,7 +75,7 @@ class RestoRepository
     
     // Entête
     $html .= '<thead><tr>';
-    foreach ($displayColumns as $col) {
+    foreach ($displayColumns as $col) { // Parcourt chaque colonne à afficher
         $html .= '<th>' . htmlspecialchars($col) . '</th>';
     }
     $html .= '<th>Modifier</th>'; // Colonne pour les boutons
@@ -86,8 +86,8 @@ class RestoRepository
     $html .= '<tbody>';
     foreach ($data as $row) {
         $html .= '<tr>';
-        foreach ($displayColumns as $col) {
-            $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>';
+        foreach ($displayColumns as $col) { // Parcourt chaque colonne à afficher
+            $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>'; // Affiche chaque cellule
         }
          $html .= '<td><a class="btn-edit" href="modifier.php?id=' . $row['id'] . '">Modifier</a></td>';
 

@@ -24,7 +24,7 @@
 
     <?php
     // Génère et affiche le tableau
-    echo $repo->renderHtml();
+    echo $tableHtml;
     ?>
-     
+
 </main>

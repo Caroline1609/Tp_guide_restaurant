@@ -137,4 +137,12 @@ public function modifyRow(int $id, array $data): bool
     return $stmt->execute($data);
 }
 
+public function chercherCollection(): string
+{
+    $sql = "SELECT * FROM {$this->table}";
+    $stmt = $this->pdo->query($sql);
+    $restaurants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return json_encode($restaurants, JSON_PRETTY_PRINT );
+}
+
 }

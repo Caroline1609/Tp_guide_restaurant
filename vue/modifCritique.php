@@ -36,7 +36,7 @@
 
 <body>
     <section id="form-ajout">
-        <h1>Modifier le restaurant</h1>
+        <h2>Modifier le restaurant</h2>
         <form method="POST">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $restaurant["nom"] ??"indeterminé" ?>" required maxlength="50">

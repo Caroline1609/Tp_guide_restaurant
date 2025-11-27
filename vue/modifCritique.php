@@ -27,7 +27,7 @@
         $success = $restoRepo->modifyRow($id, $data);
         if ($success) {
             echo "<p>Restaurant modifié avec succès !</p>";
-            echo "<p><a href='vue\page_avis.php'>Retour à la liste</a></p>";
+            echo "<p><a href='page_avis.php'>Retour à la liste</a></p>";
         } else {
             echo "<p>Erreur lors de la modification.</p>";
         }
@@ -42,19 +42,19 @@
             <input type="text" id="nom" name="nom" value="<?php echo $restaurant["nom"] ??"indeterminé" ?>" required maxlength="50">
 
             <label for="adresse">Adresse :</label>
-            <input type="text" id="adresse" name="adresse" required maxlength="100">
+            <input type="text" id="adresse" name="adresse" value="<?php echo $restaurant["adresse"] ??"indeterminé" ?>" required maxlength="100">
 
             <label for="prix">Prix (ex : 25.00) :</label>
-            <input type="number" id="prix" name="prix" step="0.01" required>
+            <input type="number" id="prix" name="prix" value="<?php echo $restaurant["prix"] ??"indeterminé" ?>" step="0.01" required>
 
             <label for="commentaire">Commentaire :</label>
-            <textarea id="commentaire" name="commentaire" rows="5" cols="50" required></textarea>
+            <textarea id="commentaire" name="commentaire" rows="5" cols="50" required><?php echo $restaurant["commentaire"] ?? "indeterminé"; ?></textarea>
 
             <label for="note">Note (0-10) :</label>
-            <input type="number" id="note" name="note" step="0.1" min="0" max="10" required>
+            <input type="number" id="note" name="note" value="<?php echo $restaurant["note"] ??"indeterminé" ?>" step="0.1" min="0" max="10" required>
 
             <label for="visite">Date de visite :</label>
-            <input type="date" id="visite" name="visite" required>
+            <input type="date" id="visite" name="visite" value="<?php echo $restaurant["visite"] ??"indeterminé" ?>" required>
 
             <button type="submit">Modifier la critique</button>
         </form>

@@ -21,7 +21,7 @@ header nav a {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Baskerville', serif;
     background-color: #f9f9f9;
     color: #333;
     padding: 20px;
@@ -114,7 +114,7 @@ main {
     margin: 0 auto 30px;
     background: #ffffff;
     padding: 18px 22px;
-    border-radius: 8px;
+    border-radius: 41px;
     box-shadow: 0 4px 12px rgba(44,62,80,0.06);
     border: 1px solid rgba(0,0,0,0.04);
 }

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title><?php echo $title ?? "Restaurant"; ?></title>
     <link rel="stylesheet" href="/Tp_guide_restaurant/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>

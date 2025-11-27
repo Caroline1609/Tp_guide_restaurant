@@ -14,7 +14,7 @@ class RestoRepository
 
     public function searchAll(): array // Récupère toutes les lignes de la table
     {
-        $sql = "SELECT id, nom, adresse, prix, commentaire, note, visite FROM {$this->table}"; // Requête SQL pour récupérer toutes les lignes
+        $sql = "SELECT id, nom, adresse, prix, commentaire, note, DATE_FORMAT(visite, '%d/%m/%Y') AS visite FROM {$this->table}"; // Requête SQL pour récupérer toutes les lignes
         $stmt = $this->pdo->query($sql); //
         return $stmt->fetchAll();
     }
@@ -137,12 +137,34 @@ public function modifyRow(int $id, array $data): bool
     return $stmt->execute($data);
 }
 
-public function chercherCollection(): string
+public function chercherCollection(): void
 {
     $sql = "SELECT * FROM {$this->table}";
     $stmt = $this->pdo->query($sql);
-    $restaurants = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return json_encode($restaurants, JSON_PRETTY_PRINT );
+    $tab = '[' ;
+    $file_path = __DIR__ . '/../../assets/json/bdd.json';
+    $success = file_put_contents($file_path, $tab, FILE_APPEND);
+    $tabObj = [];
+    $compteur = 0;
+    while ($row = $stmt->fetch()) {
+        $compteur++;
+        $json_data = json_encode($row, JSON_PRETTY_PRINT );
+        $json_data .= ',';
+         
+        array_push($tabObj,$json_data);
+    }
+   $lastElement = $tabObj [count($tabObj)-1] ;
+    $lastElement = substr($lastElement, 0, strlen($lastElement) - 1);
+    echo $lastElement;
+    $tabObj [count($tabObj) - 1] = $lastElement;
+
+
+   $success = file_put_contents($file_path, $tabObj, FILE_APPEND);
+    $fin = ']';
+    $success = file_put_contents($file_path, $fin, FILE_APPEND); 
+
+
+    
 }
 
 }

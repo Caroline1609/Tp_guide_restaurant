@@ -80,23 +80,24 @@ class RestoRepository
     $html .= '<th>Supression</th>';
     $html .= '</tr></thead>';
 
+
     // Corps du tableau
-    $html .= '<tbody>';
-    foreach ($data as $row) {
-        $html .= '<tr>';
-        foreach ($displayColumns as $col) { // Parcourt chaque colonne à afficher
-            $html .= '<td>' . htmlspecialchars($row[$col]) . '</td>'; // Affiche chaque cellule
-        }
-         $html .= '<td><a class="btn-edit" href="../vue/modifCritique.php?id=' . $row['id'] . '">Modifier</a></td>';
-        $html .= '<td>';
-        $html .= '<form method="post" action="../src/dao/delete.php" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
-        $html .= '<input type="hidden" name="id" value="' . $row['id'] . '">';
-        $html .= '<button type="submit" class="btn-delete">Supprimer</button>';
-        $html .= '</form>';
-        $html .= '</td>';
-        $html .= '</tr>';
+$html .= '<tbody>';
+foreach ($data as $row) {
+    $html .= '<tr>';
+    foreach ($displayColumns as $col) {
+        $html .= '<td data-label="' . htmlspecialchars(ucfirst($col)) . '">' . htmlspecialchars($row[$col]) . '</td>';
     }
-    $html .= '</tbody>';
+    $html .= '<td data-label="Modifier"><a class="btn-edit" href="../vue/modifCritique.php?id=' . $row['id'] . '">Modifier</a></td>';
+    $html .= '<td data-label="Supprimer">';
+    $html .= '<form method="post" action="../src/dao/delete.php" onsubmit="return confirm(\'Confirmer la suppression ?\');">';
+    $html .= '<input type="hidden" name="id" value="' . $row['id'] . '">';
+    $html .= '<button type="submit" class="btn-delete">Supprimer</button>';
+    $html .= '</form>';
+    $html .= '</td>';
+    $html .= '</tr>';
+}
+$html .= '</tbody>';
     $html .= '</table>';
 
     return $html;

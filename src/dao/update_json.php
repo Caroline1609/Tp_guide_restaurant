@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_json'])) {
         $repository->chercherCollection();
         
 
-        header('Location: ../../index.php?success=json_updated');
+        header('Location: ../../vue/page_avis.php?success=json_updated');
         exit;
         
     } catch (Exception $e) {
@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_json'])) {
         error_log("Erreur de mise à jour JSON: " . $e->getMessage());
         
 
-        header('Location: ../../index.php?error=update_failed&msg=' . urlencode($e->getMessage()));
+        header('Location: ../../vue/page_avis.php?error=update_failed&msg=' . urlencode($e->getMessage()));
         exit;
     }
 } else {
 
-    header('Location: ../../index.php');
+    header('Location: ../../vue/page_avis.php');
     exit;
 }
 

@@ -104,7 +104,7 @@ $html .= '</tbody>';
 }
 
 
-   public function insertRow($data)
+   public function insertRow($data) // Insère une nouvelle ligne dans la table
     {
         // On écrit la requête SQL avec des "placeholders" pour sécuriser les données
         $sql = "INSERT INTO {$this->table} (nom, adresse, prix, commentaire, note, visite) 
@@ -117,16 +117,16 @@ $html .= '</tbody>';
             ':nom' => $data['nom'],
             ':adresse' => $data['adresse'],
             ':prix' => $data['prix'],
-            ':commentaire' => $data['commentaire'],
-            ':note' => $data['note'],
-            ':visite' => $data['visite']
+            ':commentaire' => $data['commentaire'], 
+            ':note' => $data['note'], 
+            ':visite' => $data['visite'] 
         ]);
     }
 
     public function deleteById(int $id): bool
     {
-    $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
-    return $stmt->execute([':id' => $id]);
+    $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id"); // Préparation de la requête SQL
+    return $stmt->execute([':id' => $id]); // Exécution de la requête avec l'ID
     }
 
  
@@ -135,7 +135,7 @@ public function modifyRow(int $id, array $data): bool
     $sql = "UPDATE restaurant SET nom = :nom, adresse = :adresse, prix = :prix, commentaire = :commentaire, note = :note, visite = :visite WHERE id = :id";
     $stmt = $this->pdo->prepare($sql);
     $data['id'] = $id; // Ajoute l'ID aux données pour la requête
-    return $stmt->execute($data);
+    return $stmt->execute($data); // Exécute la requête avec les données
 }
 
 public function chercherCollection(): void
@@ -143,26 +143,24 @@ public function chercherCollection(): void
     $sql = "SELECT * FROM {$this->table}";
     $stmt = $this->pdo->query($sql);
     $tab = '[' ;
-    $file_path = __DIR__ . '/../../assets/json/bdd.json';
-    $success = file_put_contents($file_path, $tab, FILE_APPEND);
-    $tabObj = [];
-    $compteur = 0;
+    $file_path = __DIR__ . '/../../assets/json/bdd.json'; // Chemin du fichier JSON
+    $success = file_put_contents($file_path, $tab, FILE_APPEND); // Crée ou écrase le fichier avec le caractère '['
+    $tabObj = []; // Tableau pour stocker les objets JSON
     while ($row = $stmt->fetch()) {
-        $compteur++;
-        $json_data = json_encode($row, JSON_PRETTY_PRINT );
-        $json_data .= ',';
+        $json_data = json_encode($row, JSON_PRETTY_PRINT ); // Convertit la ligne en JSON avec une belle mise en forme
+        $json_data .= ','; // Ajoute une virgule pour séparer les objets
          
-        array_push($tabObj,$json_data);
+        array_push($tabObj,$json_data); // Ajoute l'objet JSON au tableau
     }
-   $lastElement = $tabObj [count($tabObj)-1] ;
-    $lastElement = substr($lastElement, 0, strlen($lastElement) - 1);
-    echo $lastElement;
-    $tabObj [count($tabObj) - 1] = $lastElement;
+   $lastElement = $tabObj [count($tabObj)-1] ; //   Récupère le dernier élément
+    $lastElement = substr($lastElement, 0, strlen($lastElement) - 1); // Supprime la virgule finale
+    echo $lastElement; // Affiche le dernier élément pour vérification
+    $tabObj [count($tabObj) - 1] = $lastElement; // Remplace le dernier élément dans le tableau
 
 
-   $success = file_put_contents($file_path, $tabObj, FILE_APPEND);
-    $fin = ']';
-    $success = file_put_contents($file_path, $fin, FILE_APPEND); 
+   $success = file_put_contents($file_path, $tabObj, FILE_APPEND); // Ajoute tous les objets JSON au fichier
+    $fin = ']'; // Caractère de fin de tableau JSON
+    $success = file_put_contents($file_path, $fin, FILE_APPEND); // Ajoute le caractère ']' à la fin du fichier
 
 
     

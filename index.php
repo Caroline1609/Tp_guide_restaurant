@@ -11,41 +11,37 @@ require 'header.php';
 
 <body>
 <main>
-    <h1>Découvrez meilleures tables d'Alsace</h1>
-        <p>Avis authentiques, restaurants testés, notes précises.</p>
+    <div class="title">
+        <h1>Découvrez meilleures tables d'Alsace</h1>
+        <h2>Avis authentiques, restaurants testés, notes précises.</h2>
+    </div>
+
         <nav>
         <section class="section">
             <div class="card">
                 <div class="card-icon">★</div>
                 <h3>Voir les avis</h3>
-                <a href="#">Voir tous les avis</a>
-            </div>
-            <div class="card">
-                <div class="card-icon">↑</div>
-                <h3>Restaurants les mieux notés</h3>
-                <a href="#">Classement co</a>
+                <a href="/tp_guide_restaurant/vue/page_avis.php">Voir tous les avis</a>
             </div>
             <div class="card">
                 <div class="card-icon">✏️</div>
                 <h3>Ajouter une critique</h3>
-                <a href="#">Nouvelle critique</a>
+                <a href="/tp_guide_restaurant/vue/formualaire_Ajout.php">Nouvelle critique</a>
             </div>
         </section>
-
-        <section>
+        <section class="a_propos">
             <h2>À propos</h2>
             <p>
                 Critiqué Culinaire est un projet qui met en valeur les restaurants d'Alsace grâce à des critiques indépendantes, honnêtes et détaillées.
                 Découvrez nos tests, nos coups de cœur, et partagez vos propres expériences.
             </p>
+            <div class="gallery">
+                <img src="assets/img/choucroute.jpg" alt="choucroute">
+                <img src="assets/img/baecleoffe.jpg" alt="baecleoffe">
+                <img src="assets/img/tarte_flambe.jpg" alt="tarte_flambe">
+                <img src="assets/img/viande-rouler.jpg" alt="viande-rouler">
+            </div>
         </section>
-
-        <div class="gallery">
-            <img src="assets/img/choucroute.jpg" alt="Plat 1">
-            <img src="https://via.placeholder.com/200x150" alt="Plat 2">
-            <img src="https://via.placeholder.com/200x150" alt="Plat 3">
-            <img src="https://via.placeholder.com/200x150" alt="Plat 4">
-        </div>
     </main>
 
 

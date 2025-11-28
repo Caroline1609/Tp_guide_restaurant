@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/RestaurantRepository.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_json'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_json'])) { // Vérifie si le formulaire a été soumis
     
     try {
 
